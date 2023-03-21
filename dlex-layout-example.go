@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+
 	"github.com/dynamicpdf-api/go-client/endpoint"
 	"github.com/dynamicpdf-api/go-client/resource"
 )
@@ -12,7 +13,7 @@ func main() {
 
 	layoutData := endpoint.NewDlexEndpoint("samples/dlex-layout/SimpleReportWithCoverPage.dlex", layoutDataResource)
 	layoutData.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	layoutData.Endpoint.ApiKey = "DP.DVs/HNreImRwrMAr4T5C8rLvcg0dCPdvpQ5187Fy1+25SbHeCHpudOMR"
+	layoutData.Endpoint.ApiKey = "<API-KEY>"
 	resp := layoutData.Process()
 	res := <-resp
 

@@ -11,7 +11,7 @@ func main() {
 	resource := resource.NewPdfResourceWithResourcePath("C:/temp/dynamicpdf-api-samples/fw4.pdf", "fw4.pdf")
 	txt := endpoint.NewPdfText(resource,1,3)
     txt.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-    txt.Endpoint.ApiKey = "DP.DVs/HNreImRwrMAr4T5C8rLvcg0dCPdvpQ5187Fy1+25SbHeCHpudOMR"
+    txt.Endpoint.ApiKey = "<API-KEY>"
 
     resp := txt.Process()
     res := <-resp

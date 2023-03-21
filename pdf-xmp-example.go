@@ -11,7 +11,7 @@ func main() {
 	resource := resource.NewPdfResourceWithResourcePath("C:/temp/dynamicpdf-api-samples/fw4.pdf", "fw4.pdf")
 	xmp := endpoint.NewPdfXmp(resource)
     xmp.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-    xmp.Endpoint.ApiKey = "DP.DVs/HNreImRwrMAr4T5C8rLvcg0dCPdvpQ5187Fy1+25SbHeCHpudOMR"
+    xmp.Endpoint.ApiKey = "<API-KEY>"
 
     resp := xmp.Process()
     res := <-resp

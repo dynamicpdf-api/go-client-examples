@@ -12,7 +12,7 @@ import (
         imageInfo := endpoint.NewImageInfo(resource)
 
         imageInfo.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-        imageInfo.Endpoint.ApiKey = "DP.DVs/HNreImRwrMAr4T5C8rLvcg0dCPdvpQ5187Fy1+25SbHeCHpudOMR"
+        imageInfo.Endpoint.ApiKey = "<API-KEY>"
 
         resp := imageInfo.Process();
 		res := <-resp
