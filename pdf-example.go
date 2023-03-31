@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-
 	"github.com/dynamicpdf-api/go-client/color"
 	"github.com/dynamicpdf-api/go-client/element"
 	"github.com/dynamicpdf-api/go-client/endpoint"

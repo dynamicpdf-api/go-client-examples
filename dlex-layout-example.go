@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-	layoutDataResource := resource.NewLayoutDataResource("c:/temp/dynamicpdf-api-samples/dlex-layout-example/SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")
+	layoutDataResource := resource   .NewLayoutDataResource("c:/temp/dynamicpdf-api-samples/dlex-layout-example/SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")
 
 	layoutData := endpoint.NewDlexEndpoint("samples/dlex-layout/SimpleReportWithCoverPage.dlex", layoutDataResource)
 	layoutData.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
