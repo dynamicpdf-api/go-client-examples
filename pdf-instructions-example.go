@@ -205,34 +205,34 @@ func templateExample(key string, baseUrl string) *endpoint.Pdf {
 
 func main() {
 
-	pdfTemp := templateExample("DP.TUzI+jra5JlcC7xtrcPG2nCKdNOnhlQCcAy7Fsqs4jExSohGyIZ2DLls", "https://api.dynamicpdf.com/")
+	pdfTemp := templateExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	process(pdfTemp,"c:/temp/dynamicpdf-api-samples/pdfTempExample.pdf")
 
-//	pdfOut := outlineExample("DP.TUzI+jra5JlcC7xtrcPG2nCKdNOnhlQCcAy7Fsqs4jExSohGyIZ2DLls", "https://api.dynamicpdf.com/")
+//	pdfOut := outlineExample("<API-KEY>", "https://api.dynamicpdf.com/")
 //	process(pdfOut,"c:/temp/dynamicpdf-api-samples/pdfOutlineExample.pdf")	
 
-//	pdfAcro := acroFormExample("DP.TUzI+jra5JlcC7xtrcPG2nCKdNOnhlQCcAy7Fsqs4jExSohGyIZ2DLls", "https://api.dynamicpdf.com/")
+//	pdfAcro := acroFormExample("<API-KEY>", "https://api.dynamicpdf.com/")
 //	process(pdfAcro,"c:/temp/dynamicpdf-api-samples/pdfAcroExample.pdf")
 
-	//pdfD := dlexResourceExample("DP.TUzI+jra5JlcC7xtrcPG2nCKdNOnhlQCcAy7Fsqs4jExSohGyIZ2DLls", "https://api.dynamicpdf.com/")
+	//pdfD := dlexResourceExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfD,"c:/temp/dynamicpdf-api-samples/pdfdlexExample.pdf")
 
-	//pdfIm := imageExample("DP.EBoj8OwntzCD2sKVWHiH09v3n+OWtR+vkwPxjmxQ53bwRr5nCnbznASo", "https://api.dynamicpdf.com/")
+	//pdfIm := imageExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfIm,"c:/temp/dynamicpdf-api-samples/pdfImage.pdf")
 
-	//pdfTlm := topLevelMetadata("DP.TUzI+jra5JlcC7xtrcPG2nCKdNOnhlQCcAy7Fsqs4jExSohGyIZ2DLls", "https://api.dynamicpdf.com/")
+	//pdfTlm := topLevelMetadata("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfTlm, "c:/temp/dynamicpdf-api-samples/tlm.pdf")
 
-	//pdfFnt := fontsExample("DP.EBoj8OwntzCD2sKVWHiH09v3n+OWtR+vkwPxjmxQ53bwRr5nCnbznASo", "https://api.dynamicpdf.com/")
+	//pdfFnt := fontsExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfFnt, "c:/temp/dynamicpdf-api-samples/fnt.pdf")
 
-	//pdfBar := barcodeExample("DP.EBoj8OwntzCD2sKVWHiH09v3n+OWtR+vkwPxjmxQ53bwRr5nCnbznASo", "https://api.dynamicpdf.com/")
+	//pdfBar := barcodeExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfBar, "c:/temp/dynamicpdf-api-samples/bar.pdf")
 
-//	pdfSec := securityExample("DP.EBoj8OwntzCD2sKVWHiH09v3n+OWtR+vkwPxjmxQ53bwRr5nCnbznASo", "https://api.dynamicpdf.com/")
+//	pdfSec := securityExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfSec, "c:/temp/dynamicpdf-api-samples/sec.pdf")
 
-	//pdfPr := pdfFromResourceExample("DP.EBoj8OwntzCD2sKVWHiH09v3n+OWtR+vkwPxjmxQ53bwRr5nCnbznASo", "https://api.dynamicpdf.com/")
+	//pdfPr := pdfFromResourceExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfPr, "c:/temp/dynamicpdf-api-samples/pdfPr.pdf")
 }
 
