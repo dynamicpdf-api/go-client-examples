@@ -12,7 +12,7 @@ func main() {
 
 	pdfExample := endpoint.NewPdf()
 	pdfExample.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pdfExample.Endpoint.ApiKey = "DP.EBoj8OwntzCD2sKVWHiH09v3n+OWtR+vkwPxjmxQ53bwRr5nCnbznASo"
+	pdfExample.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
 
 	inputOne := input.NewHtmlInputWithString("<html>An example HTML fragment.</html>")
 
