@@ -15,14 +15,12 @@ import (
 func dlexResourceExample(key string, baseUrl string) *endpoint.Pdf {
 
 	pdfD := endpoint.NewPdf()
-	pdfD.AddDlexWithCloudResourceNLayoutDataPath("samples/getting-started/getting-started.dlex","C:/temp/dynamicpdf-api-samples/getting-started.json")
+	pdfD.AddDlexWithCloudResourceNLayoutDataPath("samples/getting-started/getting-started.dlex", "C:/temp/dynamicpdf-api-samples/getting-started.json")
 	pdfD.Endpoint.BaseUrl = baseUrl
 	pdfD.Endpoint.ApiKey = key
 
 	return pdfD
 }
-
-
 
 func pdfFromResourceExample(key string, baseUrl string) *endpoint.Pdf {
 	pr := endpoint.NewPdf()
@@ -34,7 +32,7 @@ func pdfFromResourceExample(key string, baseUrl string) *endpoint.Pdf {
 
 	pdfResource := resource.NewPdfResourceWithResourcePath("c:/temp/dynamicpdf-api-samples/DocumentA.pdf", "DocumentA.pdf")
 	prInput2 := input.NewPdfWithResource(pdfResource)
-	pr.Inputs = append(pr.Inputs, prInput2);
+	pr.Inputs = append(pr.Inputs, prInput2)
 
 	return pr
 }
@@ -147,6 +145,7 @@ func acroFormExample(key string, baseUrl string) *endpoint.Pdf {
 
 	return pdfAcro
 }
+
 /*
 func outlineExample(key string, baseUrl string) *endpoint.Pdf {
 
@@ -155,7 +154,7 @@ func outlineExample(key string, baseUrl string) *endpoint.Pdf {
 	pageInputOne := pdfOut.AddPage()
 	textOne := element.NewText("Hello World 1", element.BottomCenter, 250, 0)
 	pageInputOne.Elements = append(pageInputOne.Elements, textOne)
-	
+
 	pdfOut.Inputs = append(pdfOut.Inputs, pageInputOne)
 
 	pageInputTwo := pdfOut.AddPage()
@@ -172,7 +171,7 @@ func outlineExample(key string, baseUrl string) *endpoint.Pdf {
 	out.AddWithInputValue("Page 1", pageInputOne, 1, endpoint.FitPage)
 	out.AddWithInputValue("Page 2", pageInputTwo, 2, endpoint.FitPage)
 	out.AddWithInputValue("Page 3", pageInputOne, 3, endpoint.FitPage)
-	
+
 	pdfOut.Endpoint.ApiKey = key
 	pdfOut.Endpoint.BaseUrl = baseUrl
 
@@ -193,11 +192,11 @@ func templateExample(key string, baseUrl string) *endpoint.Pdf {
 	txt := element.NewText("Hello World", element.TopCenter, 20, 10)
 	txt.SetColor(color.NewRgbColorDefault().Red().Color)
 	txt.SetFontSize(32)
-	
-	temp.Elements = append(temp.Elements,txt)
+
+	temp.Elements = append(temp.Elements, txt)
 	pdfInput1.SetTemplate(temp)
 
-	pdfTemp.Inputs = append(pdfTemp.Inputs, pdfInput1);
+	pdfTemp.Inputs = append(pdfTemp.Inputs, pdfInput1)
 
 	return pdfTemp
 
@@ -206,13 +205,13 @@ func templateExample(key string, baseUrl string) *endpoint.Pdf {
 func main() {
 
 	pdfTemp := templateExample("<API-KEY>", "https://api.dynamicpdf.com/")
-	process(pdfTemp,"c:/temp/dynamicpdf-api-samples/pdfTempExample.pdf")
+	process(pdfTemp, "c:/temp/dynamicpdf-api-samples/pdfTempExample.pdf")
 
-//	pdfOut := outlineExample("<API-KEY>", "https://api.dynamicpdf.com/")
-//	process(pdfOut,"c:/temp/dynamicpdf-api-samples/pdfOutlineExample.pdf")	
+	//	pdfOut := outlineExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//	process(pdfOut,"c:/temp/dynamicpdf-api-samples/pdfOutlineExample.pdf")
 
-//	pdfAcro := acroFormExample("<API-KEY>", "https://api.dynamicpdf.com/")
-//	process(pdfAcro,"c:/temp/dynamicpdf-api-samples/pdfAcroExample.pdf")
+	//	pdfAcro := acroFormExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//	process(pdfAcro,"c:/temp/dynamicpdf-api-samples/pdfAcroExample.pdf")
 
 	//pdfD := dlexResourceExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfD,"c:/temp/dynamicpdf-api-samples/pdfdlexExample.pdf")
@@ -229,7 +228,7 @@ func main() {
 	//pdfBar := barcodeExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfBar, "c:/temp/dynamicpdf-api-samples/bar.pdf")
 
-//	pdfSec := securityExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//	pdfSec := securityExample("<API-KEY>", "https://api.dynamicpdf.com/")
 	//process(pdfSec, "c:/temp/dynamicpdf-api-samples/sec.pdf")
 
 	//pdfPr := pdfFromResourceExample("<API-KEY>", "https://api.dynamicpdf.com/")
