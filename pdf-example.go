@@ -14,7 +14,7 @@ func main() {
 
 	pdfExample := endpoint.NewPdf()
 	pdfExample.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pdfExample.Endpoint.ApiKey = "<API-KEY>"
+	pdfExample.Endpoint.ApiKey = "DP---API-KEY---"
 
 	pageInput := input.NewPage()
 	pdfExample.Author = "John Doe"
@@ -32,14 +32,21 @@ func main() {
 	pageInput.Elements = append(pageInput.Elements, pageNumber)
 	pdfExample.Inputs = append(pdfExample.Inputs, pageInput)
 
+	fmt.Print("here")
+
     resp := pdfExample.Process()
     res := <-resp
 	
-	if res.IsSuccessful() == true {
+
+	if res.IsSuccessful() == false {
+		if res.ClientError() != nil {
+			fmt.Print("Failed with error - error: " + res.ClientError().Error())
+		} else {
+			fmt.Print("Failed with error json: " + res.ErrorJson())
+		}
+	} else{
 		os.WriteFile("C:/temp/dynamicpdf-api-samples/pdf-page-example-output.pdf", 
 		res.Content().Bytes(), os.ModeType)
-	}else {
-		fmt.Print(res.ErrorJson())
 	}
 
 }

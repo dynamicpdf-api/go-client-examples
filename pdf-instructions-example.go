@@ -85,6 +85,32 @@ func topLevelMetadata(key string, baseUrl string) *endpoint.Pdf {
 	return tlm
 }
 
+func  googleFontsExample(key string, b baseUrl string) *endpoint.PDF {
+
+	pdfCl := endpoint.NewPdf()
+	pdfCl.Endpoint.BaseUrl = baseUrl
+	pdfCl.Endpoint.ApiKey = key
+
+	pageInput := input.NewPage()
+	pageNumber := element.NewPageNumberingElement("test", "TopLeft", 0, 0)
+	pageNumber.SetFontSize(72)
+	pageNumber.TextFont()
+	pageNumber.SetFont(*font.Google("Borel"))
+
+	pageColor := color.NewRgbColorDefault().Red()
+	pageNumber.SetColor(pageColor.Color)
+
+	myTextElement := element.NewText("myTest", element.TopLeft, 100, 200)
+	myTextElement.SetFont(*font.Google("Borel"))
+
+	pageInput.Elements = append(pageInput.Elements, myTextElement)
+
+	pageInput.Elements = append(pageInput.Elements, pageNumber)
+	pdfCl.Inputs = append(pdfCl.Inputs, pageInput)
+
+	return pdfC1
+}
+
 func fontsExample(key string, baseUrl string) *endpoint.Pdf {
 
 	fe := endpoint.NewPdf()
@@ -92,42 +118,34 @@ func fontsExample(key string, baseUrl string) *endpoint.Pdf {
 	fe.Endpoint.ApiKey = key
 
 	pageInput := input.NewPage()
-	pageInput.PageHeight = 612
-	pageInput.PageWidth = 1008
+	pageNumber := element.NewPageNumberingElement("A", "TopLeft", 0, 0)
+	pageNumber.SetFontSize(42)
+	pageNumber.SetFont(font.HelveticaBoldOblique())
 
-	pageNumber := element.NewPageNumberingElement("A", "TopRight", 0, 0)
-	pageNumber.SetFontSize(32)
+	pageColor := color.NewRgbColorDefault().Red()
+	pageNumber.SetColor(pageColor.Color)
 
-	pageNumber.SetColor(color.NewRgbColorDefault().Red().Color)
+	pageNumberingElementTwo := element.NewPageNumberingElement("B", "TopRight", 0, 0)
+	pageNumberingElementTwo.SetColor(color.NewRgbColorDefault().DarkGreen().Color)
+	myFont := font.NewFontResource("c:/temp/fonts-example/cnr.otf", "cnr.otf")
+	pageNumberingElementTwo.SetFont(*myFont)
+	pageNumberingElementTwo.SetFontSize(32)
 
-	cloudString := "C:/temp/dynamicpdf-api-samples/Calibri.otf"
-	pageNumber.SetFont(*font.NewFontResource(cloudString, "Calibri.otf"))
-
-	pageNumber2 := element.NewPageNumberingElement("B", "TopCenter", 0, 0)
-	pageNumber2.SetFontSize(42)
-	pageNumber2.SetColor(color.NewRgbColorDefault().Green().Color)
-
-	//cloudString2 := "pdf-instructions/Calibri.otf"
-	//pageNumber2.SetFont(*font.NewFontResource(cloudString2, "Calibri.otf"))
-
-	pageNumber2.SetFont(font.CourierOblique())
 	pageInput.Elements = append(pageInput.Elements, pageNumber)
-	pageInput.Elements = append(pageInput.Elements, pageNumber2)
-
+	pageInput.Elements = append(pageInput.Elements, pageNumberingElementTwo)
 	fe.Inputs = append(fe.Inputs, pageInput)
 	return fe
 }
 
-/*func imageExample(key string, baseUrl string) *endpoint.Pdf {
+func imageExample(key string, baseUrl string) *endpoint.Pdf {
 	prImage := endpoint.NewPdf()
 	imageResource := resource.NewImageResourceWithResourcePath("C:/temp/dynamicpdf-api-samples/image-info/getting-started.png", "getting-started.png")
 	prImage.AddImage(imageResource)
 	prImage.AddImageCloudPath("samples/image-info/getting-started.png")
 	prImage.Endpoint.ApiKey = key
 	prImage.Endpoint.BaseUrl = baseUrl
-	return prImage;
+	return prImage
 }
-*/
 
 func acroFormExample(key string, baseUrl string) *endpoint.Pdf {
 	pdfAcro := endpoint.NewPdf()
@@ -204,34 +222,34 @@ func templateExample(key string, baseUrl string) *endpoint.Pdf {
 
 func main() {
 
-	pdfTemp := templateExample("<API-KEY>", "https://api.dynamicpdf.com/")
-	process(pdfTemp, "c:/temp/dynamicpdf-api-samples/pdfTempExample.pdf")
+	//pdfTemp := templateExample("DP---API-KEY---", "https://api.dynamicpdf.com/")
+	//process(pdfTemp, "c:/temp/dynamicpdf-api-samples/pdfTempExample.pdf")
 
-	//	pdfOut := outlineExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//	pdfOut := outlineExample("DP---API-KEY---", "https://api.dynamicpdf.com/")
 	//	process(pdfOut,"c:/temp/dynamicpdf-api-samples/pdfOutlineExample.pdf")
 
-	//	pdfAcro := acroFormExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//	pdfAcro := acroFormExample("DP---API-KEY---", "https://api.dynamicpdf.com/")
 	//	process(pdfAcro,"c:/temp/dynamicpdf-api-samples/pdfAcroExample.pdf")
 
-	//pdfD := dlexResourceExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//pdfD := dlexResourceExample("DP---API-KEY---", "https://api.dynamicpdf.com/")
 	//process(pdfD,"c:/temp/dynamicpdf-api-samples/pdfdlexExample.pdf")
 
-	//pdfIm := imageExample("<API-KEY>", "https://api.dynamicpdf.com/")
-	//process(pdfIm,"c:/temp/dynamicpdf-api-samples/pdfImage.pdf")
+	pdfIm := imageExample("DP---API-KEY---", "https://api.dynamicpdf.com/")
+	process(pdfIm, "c:/temp/dynamicpdf-api-samples/out/pdfImage.pdf")
 
-	//pdfTlm := topLevelMetadata("<API-KEY>", "https://api.dynamicpdf.com/")
+	///pdfTlm := topLevelMetadata("DP---API-KEY---", "https://api.dynamicpdf.com/")
 	//process(pdfTlm, "c:/temp/dynamicpdf-api-samples/tlm.pdf")
 
-	//pdfFnt := fontsExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//pdfFnt := fontsExample("DP---API-KEY---", "https://api.dynamicpdf.com/")
 	//process(pdfFnt, "c:/temp/dynamicpdf-api-samples/fnt.pdf")
 
-	//pdfBar := barcodeExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//pdfBar := barcodeExample("DP---API-KEY---", "https://api.dynamicpdf.com/")
 	//process(pdfBar, "c:/temp/dynamicpdf-api-samples/bar.pdf")
 
-	//	pdfSec := securityExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//	pdfSec := securityExample("DP---API-KEY---", "https://api.dynamicpdf.com/")
 	//process(pdfSec, "c:/temp/dynamicpdf-api-samples/sec.pdf")
 
-	//pdfPr := pdfFromResourceExample("<API-KEY>", "https://api.dynamicpdf.com/")
+	//pdfPr := pdfFromResourceExample("DP---API-KEY---", "https://api.dynamicpdf.com/")
 	//process(pdfPr, "c:/temp/dynamicpdf-api-samples/pdfPr.pdf")
 }
 
