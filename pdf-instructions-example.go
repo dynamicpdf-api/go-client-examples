@@ -78,12 +78,37 @@ func outlineExample() *endpoint.Pdf {
 
 	out := outline.Children()
 
-	out.AddWithInputValue("Page 1", pageInputOne.Input, 1, endpoint.FitPage)
-	out.AddWithInputValue("Page 2", pageInputTwo.Input, 2, endpoint.FitPage)
-	out.AddWithInputValue("Page 3", pageInputOne.Input, 3, endpoint.FitPage)
+	out.AddWithInputValue("Page 1", pageInputOne.Input, 0, endpoint.FitPage)
+	out.AddWithInputValue("Page 2", pageInputTwo.Input, 0, endpoint.FitPage)
+	out.AddWithInputValue("Page 3", pageInputOne.Input, 0, endpoint.FitPage)
 
 	return pdfOut
 }
+
+func addOutlinesExistingPdf(basePath string) *endpoint.Pdf {
+
+    pdfOut := endpoint.NewPdf()
+    pdfOut.Author = "John Doe"
+    pdfOut.Title = "Existing Pdf Example"
+
+    var resource1 = resource.NewPdfResourceWithResourcePath(basePath + "AllPageElements.pdf", "AllPageElements.pdf");
+    var input1 = pdfOut.AddPdf(resource1, input.NewMergeOptions());
+    input1.SetId("AllPageElements")
+     
+    var resource2 = resource.NewPdfResourceWithResourcePath(basePath + "OutlineExisting.pdf", "OutlineExisting.pdf");
+    var input2 = pdfOut.AddPdf(resource2, input.NewMergeOptions());
+    input2.SetId("outlineDoc1");
+     
+    var rootOutline = pdfOut.Outlines.Add("Imported Outline");
+    rootOutline.Expanded = true;
+
+	out := rootOutline.Children()
+	out.AddPdfOutlines(*input1)
+	out.AddPdfOutlines(*input2)
+
+	return pdfOut
+}
+
 
 func imageExample(basePath string) *endpoint.Pdf {
 	prImage := endpoint.NewPdf()
@@ -171,12 +196,16 @@ func templateExample(basePath string) *endpoint.Pdf {
 	return pdfTemp
 }
 
-func dlexResourceExample(basePath string) *endpoint.Pdf {
-	pdfD := endpoint.NewPdf()
-	pdfD.AddDlexWithCloudResourceNLayoutDataPath("samples/users-guide-resources/SimpleReportWithCoverPage.dlex",
-		basePath+"SimpleReportWithCoverPage.json")
-	return pdfD
-}
+//func dlexResourceExample(basePath string) *endpoint.Pdf {
+//	pdfD := endpoint.NewPdf()
+
+//	imageResource := resource.NewImageResourceWithResourcePath(basePath+"DPDFLogo.png", "DPDFLogo.png")
+
+
+//	pdfD.AddDlexWithCloudResourceNLayoutDataPath("samples/users-guide-resources/SimpleReportWithCoverPage.dlex",
+//		basePath+"SimpleReportWithCoverPage.json")
+//	return pdfD
+//}
 
 func googleFontsExample() *endpoint.Pdf {
 
@@ -202,36 +231,37 @@ func googleFontsExample() *endpoint.Pdf {
 	return pdfCl
 }
 
+
 func main() {
 
 	var theBasePath = "c:/temp/users-guide-resources/"
 	var theBaseUrl = "https://api.dynamicpdf.com/"
 	var theOutputPath = "c:/temp/dynamicpdf-api-usersguide-examples/go-output/"
-	var apiKey = "DP.f9wgIYZzDrTajG2MSAWUdh1m7YJ1+iexxbkV/15t0l3TR5oaxRjdGCC1"
+	var apiKey = "DP---API-KEY---"
 
-	pdfTlm := topLevelMetadata()
-	process(pdfTlm, theOutputPath+"toplevelmetadata-ouput.pdf", theBaseUrl, apiKey)
+	//pdfTlm := topLevelMetadata()
+	//process(pdfTlm, theOutputPath+"toplevelmetadata-ouput.pdf", theBaseUrl, apiKey)
 
-	pdfAcro := acroFormExample(theBasePath)
-	process(pdfAcro, theOutputPath+"pdfAcroExample-output.pdf", theBaseUrl, apiKey)
+	//pdfAcro := acroFormExample(theBasePath)
+	//process(pdfAcro, theOutputPath+"pdfAcroExample-output.pdf", theBaseUrl, apiKey)
 
-	pdfBar := barcodeExample()
-	process(pdfBar, theOutputPath+"bar-output.pdf", theBaseUrl, apiKey)
+	//pdfBar := barcodeExample()
+	//process(pdfBar, theOutputPath+"bar-output.pdf", theBaseUrl, apiKey)
 
-	pdfFnt := fontsExample(theBasePath)
-	process(pdfFnt, theOutputPath+"fnt-output.pdf", theBaseUrl, apiKey)
+	//pdfFnt := fontsExample(theBasePath)
+	//process(pdfFnt, theOutputPath+"fnt-output.pdf", theBaseUrl, apiKey)
 
-	pdfSec := securityExample(theBasePath)
-	process(pdfSec, theOutputPath+"sec-output.pdf", theBaseUrl, apiKey)
+	//pdfSec := securityExample(theBasePath)
+	//process(pdfSec, theOutputPath+"sec-output.pdf", theBaseUrl, apiKey)
 
-	pdfHtmlExample := pdfHtmlExample()
-	process(pdfHtmlExample, theOutputPath+"pdfHtmlExample-output.pdf", theBaseUrl, apiKey)
+	//pdfHtmlExample := pdfHtmlExample()
+	//process(pdfHtmlExample, theOutputPath+"pdfHtmlExample-output.pdf", theBaseUrl, apiKey)
 
-	pdfTemp := templateExample(theBasePath)
-	process(pdfTemp, theOutputPath+"pdfTempExample-output.pdf", theBaseUrl, apiKey)
+	//pdfTemp := templateExample(theBasePath)
+	//process(pdfTemp, theOutputPath+"pdfTempExample-output.pdf", theBaseUrl, apiKey)
 
-	pdfGF := googleFontsExample()
-	process(pdfGF, theOutputPath+"pdfgooglefont-output.pdf", theBaseUrl, apiKey)
+	//pdfGF := googleFontsExample()
+	//process(pdfGF, theOutputPath+"pdfgooglefont-output.pdf", theBaseUrl, apiKey)
 
 	//pdfdlexResourceExample := dlexResourceExample(theBasePath)
 	//process(pdfdlexResourceExample, theOutputPath +"dlexExample-output.pdf", theBaseUrl, apiKey)
@@ -244,6 +274,10 @@ func main() {
 
 	//pdfOut := outlineExample()
 	//process(pdfOut, theOutputPath +"outline-example-output.pdf", theBaseUrl, apiKey)
+
+	pdfOut2 := addOutlinesExistingPdf(theBasePath)
+	process(pdfOut2, theOutputPath +"outline-existing-example-output.pdf", theBaseUrl, apiKey)
+
 
 }
 
