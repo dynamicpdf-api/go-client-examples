@@ -87,20 +87,20 @@ func outlineExample() *endpoint.Pdf {
 
 func addOutlinesExistingPdf(basePath string) *endpoint.Pdf {
 
-    pdfOut := endpoint.NewPdf()
-    pdfOut.Author = "John Doe"
-    pdfOut.Title = "Existing Pdf Example"
+	pdfOut := endpoint.NewPdf()
+	pdfOut.Author = "John Doe"
+	pdfOut.Title = "Existing Pdf Example"
 
-    var resource1 = resource.NewPdfResourceWithResourcePath(basePath + "AllPageElements.pdf", "AllPageElements.pdf");
-    var input1 = pdfOut.AddPdf(resource1, input.NewMergeOptions());
-    input1.SetId("AllPageElements")
-     
-    var resource2 = resource.NewPdfResourceWithResourcePath(basePath + "OutlineExisting.pdf", "OutlineExisting.pdf");
-    var input2 = pdfOut.AddPdf(resource2, input.NewMergeOptions());
-    input2.SetId("outlineDoc1");
-     
-    var rootOutline = pdfOut.Outlines.Add("Imported Outline");
-    rootOutline.Expanded = true;
+	var resource1 = resource.NewPdfResourceWithResourcePath(basePath+"AllPageElements.pdf", "AllPageElements.pdf")
+	var input1 = pdfOut.AddPdf(resource1, input.NewMergeOptions())
+	input1.SetId("AllPageElements")
+
+	var resource2 = resource.NewPdfResourceWithResourcePath(basePath+"OutlineExisting.pdf", "OutlineExisting.pdf")
+	var input2 = pdfOut.AddPdf(resource2, input.NewMergeOptions())
+	input2.SetId("outlineDoc1")
+
+	var rootOutline = pdfOut.Outlines.Add("Imported Outline")
+	rootOutline.Expanded = true
 
 	out := rootOutline.Children()
 	out.AddPdfOutlines(*input1)
@@ -108,7 +108,6 @@ func addOutlinesExistingPdf(basePath string) *endpoint.Pdf {
 
 	return pdfOut
 }
-
 
 func imageExample(basePath string) *endpoint.Pdf {
 	prImage := endpoint.NewPdf()
@@ -201,7 +200,6 @@ func templateExample(basePath string) *endpoint.Pdf {
 
 //	imageResource := resource.NewImageResourceWithResourcePath(basePath+"DPDFLogo.png", "DPDFLogo.png")
 
-
 //	pdfD.AddDlexWithCloudResourceNLayoutDataPath("samples/users-guide-resources/SimpleReportWithCoverPage.dlex",
 //		basePath+"SimpleReportWithCoverPage.json")
 //	return pdfD
@@ -231,7 +229,6 @@ func googleFontsExample() *endpoint.Pdf {
 	return pdfCl
 }
 
-
 func main() {
 
 	var theBasePath = "c:/temp/users-guide-resources/"
@@ -257,8 +254,8 @@ func main() {
 	//pdfHtmlExample := pdfHtmlExample()
 	//process(pdfHtmlExample, theOutputPath+"pdfHtmlExample-output.pdf", theBaseUrl, apiKey)
 
-	//pdfTemp := templateExample(theBasePath)
-	//process(pdfTemp, theOutputPath+"pdfTempExample-output.pdf", theBaseUrl, apiKey)
+	pdfTemp := templateExample(theBasePath)
+	process(pdfTemp, theOutputPath+"pdfTempExample-output.pdf", theBaseUrl, apiKey)
 
 	//pdfGF := googleFontsExample()
 	//process(pdfGF, theOutputPath+"pdfgooglefont-output.pdf", theBaseUrl, apiKey)
@@ -276,8 +273,7 @@ func main() {
 	//process(pdfOut, theOutputPath +"outline-example-output.pdf", theBaseUrl, apiKey)
 
 	pdfOut2 := addOutlinesExistingPdf(theBasePath)
-	process(pdfOut2, theOutputPath +"outline-existing-example-output.pdf", theBaseUrl, apiKey)
-
+	process(pdfOut2, theOutputPath+"outline-existing-example-output.pdf", theBaseUrl, apiKey)
 
 }
 
