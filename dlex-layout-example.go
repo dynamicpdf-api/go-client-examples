@@ -3,25 +3,23 @@ package main
 import (
 	"fmt"
 	"os"
-	"strconv"
+
 	"github.com/dynamicpdf-api/go-client/endpoint"
 	"github.com/dynamicpdf-api/go-client/resource"
 )
 
 func main() {
 
-	layoutDataResource := resource.NewLayoutDataResource("c:/temp/dynamicpdf-api-samples/error-handling-example/SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")
+	layoutDataResource := resource.NewLayoutDataResource("c:/temp/dynamicpdf-api-samples/creating-pdf-dlex-layout.json", "creating-pdf-dlex-layout.json")
 
-	layoutData := endpoint.NewDlexEndpoint("samples/error-handling-example/SimpleReportWithCoverPage.dlex", layoutDataResource)
+	layoutData := endpoint.NewDlexEndpoint("samples/creating-pdf-dlex-layout-endpoint/creating-pdf-dlex-layout.dlex", layoutDataResource)
 	layoutData.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	layoutData.Endpoint.ApiKey = "<API-KEY>"
+	layoutData.Endpoint.ApiKey = "DP.---API-KEY---"
 	resp := layoutData.Process()
 	res := <-resp
 
-	fmt.Println("HTTP Response: " + strconv.Itoa(res.StatusCode()))
-
 	if res.IsSuccessful() == true {
-		os.WriteFile("c:/temp/dynamicpdf-api-samples/dlex-layout-example/output.pdf", res.Content().Bytes(), os.ModeType)
+		os.WriteFile("c:/temp/dynamicpdf-api-samples/dlex-layout-output.pdf", res.Content().Bytes(), os.ModeType)
 	} else {
 		fmt.Println("errorId: " + res.ErrorId().String())
 		fmt.Println("errorMsg: " + res.ErrorMessage())
