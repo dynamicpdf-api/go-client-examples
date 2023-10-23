@@ -46,6 +46,7 @@ The following table lists the available tutorials.
 | Extract PDF Metadata                               | `GetPdfInfo`            | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-info |
 | Extracting PDF's Text                              | `ExtractingText`        | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-text |
 | Extract XMP Metadata                               | `GetXmpMetaData`        | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-xmp |
+| Convert HTML to PDF                                | `pdf-html-example.go`   | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-html |
 
 # Support
 
