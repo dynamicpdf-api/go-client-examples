@@ -37,15 +37,15 @@ The following table lists the available tutorials.
 
 | Tutorial Title                                     | Project/File/Class      | Tutorial Location                                            |
 | -------------------------------------------------- | ----------------------- | ------------------------------------------------------------ |
-| Merging PDFs                                       | MergePdfs               | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/merging-pdfs |
-| Completing an AcroForm                             | `CompletingAcroForm`    | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/form-completion |
-| Creating a PDF Using a DLEX and the `pdf` Endpoint | `CreatingPdfDlex`       | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/dlex-pdf-endpoint |
-| Adding Bookmarks to a PDF                          | `AddBookmarks`          | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/bookmarks |
-| Creating a PDF Using the `dlex-layout` Endpoint    | `CreatingPdfDlexLayout` | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/dlex-layout |
-| Extracting Image Metadata                          | `GetImageInfo`          | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/image-info |
-| Extract PDF Metadata                               | `GetPdfInfo`            | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-info |
-| Extracting PDF's Text                              | `ExtractingText`        | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-text |
-| Extract XMP Metadata                               | `GetXmpMetaData`        | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-xmp |
+| Merging PDFs                                       | `merge-pdfs.go`               | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/merging-pdfs |
+| Completing an AcroForm                             | `fill-acroform.go`    | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/form-completion |
+| Creating a PDF Using a DLEX and the `pdf` Endpoint | `dlex-dlex-example.go`       | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/dlex-pdf-endpoint |
+| Adding Bookmarks to a PDF                          | `add-bookmarks-example.go`          | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/bookmarks |
+| Creating a PDF Using the `dlex-layout` Endpoint    | `dlex-layout-example.go` | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/dlex-layout |
+| Extracting Image Metadata                          | `image-info-example.go`          | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/image-info |
+| Extract PDF Metadata                               | `pdf-info-example.go`            | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-info |
+| Extracting PDF's Text                              | `pdf-text-example.go`        | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-text |
+| Extract XMP Metadata                               | `pdf-xmp-example.go`        | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-xmp |
 | Convert HTML to PDF                                | `pdf-html-example.go`   | https://cloud.dynamicpdf.com/docs/tutorials/cloud-api/pdf-html |
 
 # Support
