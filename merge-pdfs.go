@@ -13,7 +13,7 @@ func main() {
 
 	pr := endpoint.NewPdf()
 	pr.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pr.Endpoint.ApiKey = "DP.---API-KEY---"
+	pr.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
 	basePath := "c:/temp/dynamicpdf-api-samples/"
 
 	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"DocumentA.pdf", "DocumentA.pdf")

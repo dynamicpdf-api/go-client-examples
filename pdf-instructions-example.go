@@ -234,7 +234,7 @@ func main() {
 	var theBasePath = "c:/temp/users-guide-resources/"
 	var theBaseUrl = "https://api.dynamicpdf.com/"
 	var theOutputPath = "c:/temp/dynamicpdf-api-usersguide-examples/go-output/"
-	var apiKey = "DP---API-KEY---"
+	var apiKey = "DP.xxx-api-key-xxx"
 
 	//pdfTlm := topLevelMetadata()
 	//process(pdfTlm, theOutputPath+"toplevelmetadata-ouput.pdf", theBaseUrl, apiKey)

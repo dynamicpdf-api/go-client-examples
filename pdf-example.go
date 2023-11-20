@@ -14,7 +14,7 @@ func main() {
 
 	pdfExample := endpoint.NewPdf()
 	pdfExample.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pdfExample.Endpoint.ApiKey = "DP---API-KEY---"
+	pdfExample.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
 
 	pageInput := input.NewPage()
 	pdfExample.Author = "John Doe"

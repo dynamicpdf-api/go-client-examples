@@ -11,7 +11,7 @@ func main() {
 
 	pr := endpoint.NewPdf()
 	pr.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pr.Endpoint.ApiKey = "DP---API-KEY---"
+	pr.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
 	basePath := "c:/temp/dynamicpdf-api-samples/"
 
 	layoutDataResource := resource.NewLayoutDataResource(basePath+"SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")

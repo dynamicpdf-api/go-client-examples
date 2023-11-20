@@ -13,7 +13,7 @@ func main() {
 
 	pdfAcro := endpoint.NewPdf()
 	pdfAcro.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pdfAcro.Endpoint.ApiKey = "DP.--API-KEY---"
+	pdfAcro.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
 	basePath := "c:/temp/dynamicpdf-api-samples/"
 
 	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"fw9AcroForm_18.pdf", "fw9AcroForm_18.pdf")

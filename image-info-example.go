@@ -12,7 +12,7 @@ import (
         imageInfo := endpoint.NewImageInfo(resource)
 
         imageInfo.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-        imageInfo.Endpoint.ApiKey = "DP---API-KEY---"
+        imageInfo.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
 
         resp := imageInfo.Process();
 		res := <-resp
@@ -29,7 +29,7 @@ import (
         imageInfo := endpoint.NewImageInfo(resource)
 
         imageInfo.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-        imageInfo.Endpoint.ApiKey = "DP.DVs/HNreImRwrMAr4T5C8rLvcg0dCPdvpQ5187Fy1+25SbHeCHpudOMR"
+        imageInfo.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
 
         resp := imageInfo.Process();
 		res := <-resp
@@ -41,8 +41,8 @@ import (
     } 
 
     func main() {
-      RunOne("DP.DVs/HNreImRwrMAr4T5C8rLvcg0dCPdvpQ5187Fy1+25SbHeCHpudOMR",
+      RunOne("DP.xxx-api-key-xxx",
                 "C:/temp/dynamicpdf-api-samples/image-info")
-      RunTwo("DP.DVs/HNreImRwrMAr4T5C8rLvcg0dCPdvpQ5187Fy1+25SbHeCHpudOMR",
+      RunTwo("DP.xxx-api-key-xxx",
                 "C:/temp/dynamicpdf-api-usersguide-examples/image-info")
     }
