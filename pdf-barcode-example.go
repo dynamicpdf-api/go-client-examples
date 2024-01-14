@@ -4,24 +4,24 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/dynamicpdf-api/go-client/color"
 	"github.com/dynamicpdf-api/go-client/element"
 	"github.com/dynamicpdf-api/go-client/endpoint"
 	"github.com/dynamicpdf-api/go-client/input"
-	"github.com/dynamicpdf-api/go-client/color"
 )
 
 func main() {
 
 	barcodePdf := endpoint.NewPdf()
 	barcodePdf.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	barcodePdf.Endpoint.ApiKey = "DP.Te3ojcvyjQrJgazrM5VSvTCEchK5fteDJ6N6e01cEdltSI+qlS9K/rDD"
+	barcodePdf.Endpoint.ApiKey = "DP.--api-key--"
 
 	pageInput := input.NewPage()
 	pageInput.PageHeight = 621
 	pageInput.PageWidth = 1008
 
 	barcode := element.NewCode11Barcode("12345678910", element.TopCenter, 200, 50, 50)
-	barcode.SetColor(color.NewRgbColorDefault().Red().Color);
+	barcode.SetColor(color.NewRgbColorDefault().Red().Color)
 
 	pageInput.Elements = append(pageInput.Elements, barcode)
 	barcodePdf.Inputs = append(barcodePdf.Inputs, pageInput)
