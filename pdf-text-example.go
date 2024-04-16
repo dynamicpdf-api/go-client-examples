@@ -8,10 +8,10 @@ import (
 
 func main() {
 
-	resource := resource.NewPdfResourceWithResourcePath("C:/temp/dynamicpdf-api-samples/fw4.pdf", "fw4.pdf")
-	txt := endpoint.NewPdfText(resource,1,3)
-    txt.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-    txt.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
+	resource := resource.NewPdfResourceWithResourcePath("./resources/pdf-info/fw4.pdf", "fw4.pdf")
+	txt := endpoint.NewPdfText(resource,1,2)
+    txt.Endpoint.BaseUrl = "https://api.dpdf.io/"
+    txt.Endpoint.ApiKey = "DP--api-key--"
 
     resp := txt.Process()
     res := <-resp

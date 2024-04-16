@@ -12,9 +12,9 @@ import (
 func main() {
 
 	pr := endpoint.NewPdf()
-	pr.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pr.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
-	basePath := "c:/temp/dynamicpdf-api-samples/"
+	pr.Endpoint.BaseUrl = "https://api.dpdf.io"
+	pr.Endpoint.ApiKey = "DP--api-key--"
+	basePath := "c:/temp/dynamicpdf-api-samples/merge-pdfs-pdf-endpoint/"
 
 	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"DocumentA.pdf", "DocumentA.pdf")
 	prInput := input.NewPdfWithResource(pdfResource)

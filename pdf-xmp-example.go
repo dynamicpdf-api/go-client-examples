@@ -9,10 +9,10 @@ import (
 
 func main() {
 
-	resource := resource.NewPdfResourceWithResourcePath("C:/temp/dynamicpdf-api-samples/fw4.pdf", "fw4.pdf")
+	resource := resource.NewPdfResourceWithResourcePath("C:/temp/dynamicpdf-api-samples/get-xmp-metadata-pdf-xmp-endpoint/fw4.pdf", "fw4.pdf")
 	xmp := endpoint.NewPdfXmp(resource)
-	xmp.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	xmp.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
+	xmp.Endpoint.BaseUrl = "https://api.dpdf.io/"
+	xmp.Endpoint.ApiKey = "DP--api-key--"
 
 	resp := xmp.Process()
 	res := <-resp
