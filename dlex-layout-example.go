@@ -14,11 +14,12 @@ func main() {
 	processLocal()
 
 }
-
 func processCloud() {
-	layoutDataResource := resource.NewLayoutDataResource("./resources/dlex-layout/SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")
+	layoutDataResource := resource.NewLayoutDataResource("./resources/creating-pdf-dlex-layout/creating-pdf-dlex-layout.json", 
+		"creating-pdf-dlex-layout.json")
 
-	layoutData := endpoint.NewDlexEndpoint("samples/dlex-layout/SimpleReportWithCoverPage.dlex", layoutDataResource)
+	layoutData := endpoint.NewDlexEndpoint("samples/creating-pdf-dlex-layout-endpoint/creating-pdf-dlex-layout.dlex", 
+		layoutDataResource)
 	layoutData.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
 	layoutData.Endpoint.ApiKey = "DP--api-key--"
 	resp := layoutData.Process()
@@ -35,20 +36,22 @@ func processCloud() {
 }
 
 func processLocal() {
-	layoutDataResource := resource.NewLayoutDataResource("./resources/dlex-layout/SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")
+	layoutDataResource := resource.NewLayoutDataResource("./resources/creating-pdf-dlex-layout/creating-pdf-dlex-layout.json", 
+		"creating-pdf-dlex-layout.json")
 
-	theDlexResource := resource.NewDlexResourceWithPath("./resources/dlex-layout/SimpleReportWithCoverPage.dlex", "SimpleReportWithCoverPage.dlex")
+	theDlexResource := resource.NewDlexResourceWithPath("./resources/creating-pdf-dlex-layout/creating-pdf-dlex-layout.dlex", 
+		"creating-pdf-dlex-layout.dlex")
 
+	theDlexEndpoint := endpoint.NewDlexEndpointWithResource(*theDlexResource, layoutDataResource)
 
-	layoutData := endpoint.NewDlexEndpointWithResource(*theDlexResource, layoutDataResource)
+	additionalResource := endpoint.NewDlexWithAdditionalResource("./resources/creating-pdf-dlex-layout/creating-pdf-dlex-layout.png", 
+		"creating-pdf-dlex-layout.png")
 
-	additionalResource := endpoint.NewDlexWithAdditionalResource("./resources/dlex-layout/NorthwindLogo.gif", "NorthwindLogo.gif")
+	theDlexEndpoint.Resources = append(theDlexEndpoint.Resources, additionalResource)
 
-	layoutData.Resources = append(layoutData.Resources, additionalResource);
-
-	layoutData.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	layoutData.Endpoint.ApiKey = "DP--api-key--"
-	resp := layoutData.Process()
+	theDlexEndpoint.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
+	theDlexEndpoint.Endpoint.ApiKey = "DP--api-key--"
+	resp := theDlexEndpoint.Process()
 
 	res := <-resp
 

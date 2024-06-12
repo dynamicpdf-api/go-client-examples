@@ -12,7 +12,7 @@ func main() {
 
 	pr := endpoint.NewPdf()
 	pr.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pr.Endpoint.ApiKey = "DP.YiiwxLayFM+8Euh8maikrjYLUDj91/p3e5Yl72Ij1Np6SJK932bSdiHi"
+	pr.Endpoint.ApiKey = "DP--api-key--"
 	basePath := "c:/temp/solutions/image-conversion/"
 
 	//imageResource2 := resource.NewImageResourceWithResourcePath(basePath+"dynamicpdfLogo.png", "dynamicpdfLogo.png")

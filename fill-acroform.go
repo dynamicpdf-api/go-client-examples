@@ -11,7 +11,7 @@ func main() {
 
 	pdfAcro := endpoint.NewPdf()
 	pdfAcro.Endpoint.BaseUrl = "https://api.dpdf.io/"
-	pdfAcro.Endpoint.ApiKey = "DP.JhxLbLKFBSfPRqETu2/aLD0WH77wLN9aKA0h64bE1tvyRZuk3cDjltzk"
+	pdfAcro.Endpoint.ApiKey = "DP--api-key--"
 	outputPath := "./output/"
 
 

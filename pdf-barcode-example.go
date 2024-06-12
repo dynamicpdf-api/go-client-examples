@@ -14,7 +14,7 @@ func main() {
 
 	barcodePdf := endpoint.NewPdf()
 	barcodePdf.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	barcodePdf.Endpoint.ApiKey = "DP.--api-key--"
+	barcodePdf.Endpoint.ApiKey = "DP--api-key--"
 
 	pageInput := input.NewPage()
 	pageInput.PageHeight = 621

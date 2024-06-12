@@ -9,10 +9,50 @@ import (
 
 func main() {
 
+	baseUrl := "https://api.dynamicpdf.com/"
+	apiKey := "DP--api-key--"
+	basePath := "./resources/creating-pdf-pdf-endpoint/"
+
+	processCloudPdf(baseUrl, apiKey, basePath)
+	processLocalPdf(baseUrl, apiKey, basePath)
+}
+
+func processLocalPdf(baseUrl string, apiKey string, basePath string) {
+
 	pr := endpoint.NewPdf()
-	pr.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pr.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
-	basePath := "c:/temp/dynamicpdf-api-samples/"
+	pr.Endpoint.BaseUrl = baseUrl
+	pr.Endpoint.ApiKey = apiKey
+
+	layoutDataResource := resource.NewLayoutDataResource(basePath + "SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")
+	
+	theDlexResource := resource.NewDlexResourceWithPath(basePath + "SimpleReportWithCoverPage.dlex", "SimpleReportWithCoverPage.dlex")
+
+	pr.AddNewDlexWithDlexNLayoutResources(*theDlexResource, layoutDataResource)
+
+	additionalResource := endpoint.NewDlexWithAdditionalResource(basePath + "Northwind Logo.gif", "Northwind Logo.gif")
+
+
+	resp := pr.Process()
+	res := <-resp
+
+	if res.IsSuccessful() == false {
+		if res.ClientError() != nil {
+			fmt.Print("Failed with error: " + res.ClientError().Error())
+		} else {
+			fmt.Print("Failed with error: " + res.ErrorJson())
+		}
+	} else {
+		os.WriteFile(basePath+"pdf-dlex-pdf-local-output.pdf",
+			res.Content().Bytes(), os.ModeType)
+	}
+}
+
+func processCloudPdf(baseUrl string, apiKey string, basePath string) {
+
+	pr := endpoint.NewPdf()
+	pr.Endpoint.BaseUrl = baseUrl
+	pr.Endpoint.ApiKey = apiKey
+	
 
 	layoutDataResource := resource.NewLayoutDataResource(basePath+"SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")
 
@@ -28,7 +68,7 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile(basePath+"pdf-dlex-pdf-output.pdf",
+		os.WriteFile(basePath+"pdf-dlex-pdf-remote-output.pdf",
 			res.Content().Bytes(), os.ModeType)
 	}
 

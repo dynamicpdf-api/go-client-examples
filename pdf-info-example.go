@@ -12,7 +12,7 @@ import (
       text := endpoint.NewPdfInfoResource(resource)
       
       text.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-      text.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
+      text.Endpoint.ApiKey = "DP--api-key--"
 
       resp := text.Process()
       res := <-resp

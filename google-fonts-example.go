@@ -15,7 +15,7 @@ func main() {
 
 	pdfCl := endpoint.NewPdf()
 	pdfCl.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pdfCl.Endpoint.ApiKey = "DP.xxx-api-key-xxx"
+	pdfCl.Endpoint.ApiKey = "DP.--api-key--"
 
 	pageInput := input.NewPage()
 	pageNumber := element.NewPageNumberingElement("test", "TopLeft", 0, 0)
