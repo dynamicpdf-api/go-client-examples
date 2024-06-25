@@ -57,7 +57,7 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile(outputPath + "/add-bookmarks-pdf-output.pdf",
+		os.WriteFile(outputPath+"/add-bookmarks-pdf-output.pdf",
 			res.Content().Bytes(), os.ModeType)
 	}
 }
