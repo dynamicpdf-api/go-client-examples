@@ -15,7 +15,8 @@ func main() {
 	pr := endpoint.NewPdf()
 	pr.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
 	pr.Endpoint.ApiKey = "DP--api-key--"
-	basePath := "c:/temp/dynamicpdf-api-samples/"
+	basePath := "./resources/add-bookmarks/"
+	outputPath := "./output/"
 
 	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"DocumentA.pdf", "DocumentA.pdf")
 	prInput := input.NewPdfWithResource(pdfResource)
@@ -56,7 +57,7 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile(basePath+"add-bookmarks-pdf-output.pdf",
+		os.WriteFile(outputPath + "/add-bookmarks-pdf-output.pdf",
 			res.Content().Bytes(), os.ModeType)
 	}
 }
