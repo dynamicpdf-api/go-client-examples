@@ -30,10 +30,10 @@ func topLevelMetadata() *endpoint.Pdf {
 func mergeExample(basePath string) *endpoint.Pdf {
 	pr := endpoint.NewPdf()
 	mergeOption := input.NewMergeOptions()
-	prInput := input.NewPdfWithCloudPath("samples/users-guide-resources/DocumentB.pdf", mergeOption)
+	prInput := input.NewPdfWithCloudPath("samples/merge-pdfs-pdf-endpoint/DocumentB.pdf", mergeOption)
 	pr.Inputs = append(pr.Inputs, prInput)
-	imageResource := resource.NewImageResourceWithResourcePath(basePath+"DPDFLogo.png", "DPDFLogo.png")
-	pr.AddImage(imageResource)
+	//imageResource := resource.NewImageResourceWithResourcePath(basePath+"DPDFLogo.png", "DPDFLogo.png")
+	//pr.AddImage(imageResource)
 	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"DocumentA.pdf", "DocumentA.pdf")
 	prInput2 := input.NewPdfWithResource(pdfResource)
 	pr.Inputs = append(pr.Inputs, prInput2)
@@ -49,7 +49,7 @@ func acroFormExample(basePath string) *endpoint.Pdf {
 
 	field1 := endpoint.NewFormFieldWithValue("nameField", "DynamicPdf")
 	pdfAcro.FormFields = append(pdfAcro.FormFields, *field1)
-	field2 := endpoint.NewFormFieldWithValue("descriptionField", "RealRTime Pdf's. Real FAST!")
+	field2 := endpoint.NewFormFieldWithValue("descriptionField", "RealTime Pdf's. Real FAST!")
 	pdfAcro.FormFields = append(pdfAcro.FormFields, *field2)
 
 	return pdfAcro
@@ -109,13 +109,13 @@ func addOutlinesExistingPdf(basePath string) *endpoint.Pdf {
 	return pdfOut
 }
 
-func imageExample(basePath string) *endpoint.Pdf {
-	prImage := endpoint.NewPdf()
-	imageResource := resource.NewImageResourceWithResourcePath(basePath+"DPDFLogo.png", "DPDFLogo.png")
-	prImage.AddImage(imageResource)
-	prImage.AddImageCloudPath("samples/users-guide-resources/A.png")
-	return prImage
-}
+//func imageExample(basePath string) *endpoint.Pdf {
+//	prImage := endpoint.NewPdf()
+//	imageResource := resource.NewImageResourceWithResourcePath(basePath+"A.png", "A.png")
+//	prImage.AddImage(imageResource)
+//	prImage.AddImageCloudPath("samples/get-image-info-image-info-endpoint/dynamicpdfLogo.png")
+//	return prImage
+//}
 
 func barcodeExample() *endpoint.Pdf {
 	barcodePdf := endpoint.NewPdf()
@@ -231,34 +231,34 @@ func googleFontsExample() *endpoint.Pdf {
 
 func main() {
 
-	var theBasePath = "c:/temp/users-guide-resources/"
+	var theBasePath = "./resources/users-guide/"
 	var theBaseUrl = "https://api.dynamicpdf.com/"
-	var theOutputPath = "c:/temp/dynamicpdf-api-usersguide-examples/go-output/"
-	var apiKey = "DP.xxx-api-key-xxx"
+	var theOutputPath = "./Output/"
+	var apiKey = "DP--api-key--"
 
-	//pdfTlm := topLevelMetadata()
-	//process(pdfTlm, theOutputPath+"toplevelmetadata-ouput.pdf", theBaseUrl, apiKey)
+	pdfTlm := topLevelMetadata()
+	process(pdfTlm, theOutputPath+"toplevelmetadata-ouput.pdf", theBaseUrl, apiKey)
 
-	//pdfAcro := acroFormExample(theBasePath)
-	//process(pdfAcro, theOutputPath+"pdfAcroExample-output.pdf", theBaseUrl, apiKey)
+	pdfAcro := acroFormExample(theBasePath)
+	process(pdfAcro, theOutputPath+"pdfAcroExample-output.pdf", theBaseUrl, apiKey)
 
-	//pdfBar := barcodeExample()
-	//process(pdfBar, theOutputPath+"bar-output.pdf", theBaseUrl, apiKey)
+	pdfBar := barcodeExample()
+	process(pdfBar, theOutputPath+"bar-output.pdf", theBaseUrl, apiKey)
 
-	//pdfFnt := fontsExample(theBasePath)
-	//process(pdfFnt, theOutputPath+"fnt-output.pdf", theBaseUrl, apiKey)
+	pdfFnt := fontsExample(theBasePath)
+	process(pdfFnt, theOutputPath+"fnt-output.pdf", theBaseUrl, apiKey)
 
-	//pdfSec := securityExample(theBasePath)
-	//process(pdfSec, theOutputPath+"sec-output.pdf", theBaseUrl, apiKey)
+	pdfSec := securityExample(theBasePath)
+	process(pdfSec, theOutputPath+"sec-output.pdf", theBaseUrl, apiKey)
 
-	//pdfHtmlExample := pdfHtmlExample()
-	//process(pdfHtmlExample, theOutputPath+"pdfHtmlExample-output.pdf", theBaseUrl, apiKey)
+	pdfHtmlExample := pdfHtmlExample()
+	process(pdfHtmlExample, theOutputPath+"pdfHtmlExample-output.pdf", theBaseUrl, apiKey)
 
 	pdfTemp := templateExample(theBasePath)
 	process(pdfTemp, theOutputPath+"pdfTempExample-output.pdf", theBaseUrl, apiKey)
 
-	//pdfGF := googleFontsExample()
-	//process(pdfGF, theOutputPath+"pdfgooglefont-output.pdf", theBaseUrl, apiKey)
+	pdfGF := googleFontsExample()
+	process(pdfGF, theOutputPath+"pdfgooglefont-output.pdf", theBaseUrl, apiKey)
 
 	//pdfdlexResourceExample := dlexResourceExample(theBasePath)
 	//process(pdfdlexResourceExample, theOutputPath +"dlexExample-output.pdf", theBaseUrl, apiKey)
@@ -266,11 +266,11 @@ func main() {
 	//pdfIm := imageExample(theBasePath)
 	//process(pdfIm, theOutputPath + "pdfImage-output.pdf", theBaseUrl, apiKey)
 
-	//pdfOut := mergeExample(theBasePath)
-	//process(pdfOut, theOutputPath+"go-merge-example-output.pdf", theBaseUrl, apiKey)
+	pdfMerge := mergeExample(theBasePath)
+	process(pdfMerge, theOutputPath+"go-merge-example-output.pdf", theBaseUrl, apiKey)
 
-	//pdfOut := outlineExample()
-	//process(pdfOut, theOutputPath +"outline-example-output.pdf", theBaseUrl, apiKey)
+	pdfOut := outlineExample()
+	process(pdfOut, theOutputPath +"outline-example-output.pdf", theBaseUrl, apiKey)
 
 	pdfOut2 := addOutlinesExistingPdf(theBasePath)
 	process(pdfOut2, theOutputPath+"outline-existing-example-output.pdf", theBaseUrl, apiKey)
