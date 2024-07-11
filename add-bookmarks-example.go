@@ -4,19 +4,26 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dynamicpdf-api/go-client/color"
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/input"
-	"github.com/dynamicpdf-api/go-client/resource"
+	"github.com/dynamicpdf-api/go-client/v2/color"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/input"
+	"github.com/dynamicpdf-api/go-client/v2/resource"
 )
+
+var basePath string
+var apiKey string
+var outputPath string
+
+func init() {
+	basePath = "./resources/add-bookmarks/"
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/add-bookmarks-pdfs-go-output.pdf"
+}
 
 func main() {
 
 	pr := endpoint.NewPdf()
-	pr.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pr.Endpoint.ApiKey = "DP--api-key--"
-	basePath := "./resources/add-bookmarks/"
-	outputPath := "./output/"
+	pr.Endpoint.ApiKey = apiKey
 
 	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"DocumentA.pdf", "DocumentA.pdf")
 	prInput := input.NewPdfWithResource(pdfResource)
@@ -57,7 +64,8 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile(outputPath+"/add-bookmarks-pdf-output.pdf",
+		os.Remove(outputPath)
+		os.WriteFile(outputPath,
 			res.Content().Bytes(), os.ModeType)
 	}
 }

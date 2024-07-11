@@ -4,20 +4,24 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/input"
-	"github.com/dynamicpdf-api/go-client/resource"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/input"
+	"github.com/dynamicpdf-api/go-client/v2/resource"
 )
+
+var basePath string
+var apiKey string
+var outputPath string
+
+func init() {
+	basePath = "./resources/converting-html-pdf-endpoint/"
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/pdf-html-go-output.pdf"
+}
 
 func main() {
 
-	baseUrl := "https://api.dynamicpdf.com/"
-	apiKey := "DP--api-key--"
-	basePath := "./resources/converting-html-pdf-endpoint/"
-	outputPath := "./output/"
-
 	pdfExample := endpoint.NewPdf()
-	pdfExample.Endpoint.BaseUrl = baseUrl
 	pdfExample.Endpoint.ApiKey = apiKey
 
 	inputOne := input.NewHtmlInputWithString("<html>An example HTML fragment.</html>")
@@ -37,7 +41,8 @@ func main() {
 	res := <-resp
 
 	if res.IsSuccessful() == true {
-		os.WriteFile(outputPath+"pdf-html-go-output.pdf",
+		os.Remove(outputPath)
+		os.WriteFile(outputPath,
 			res.Content().Bytes(), os.ModeType)
 	} else {
 		fmt.Print(res.ErrorJson())

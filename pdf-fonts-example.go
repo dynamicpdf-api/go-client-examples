@@ -4,18 +4,27 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dynamicpdf-api/go-client/color"
-	"github.com/dynamicpdf-api/go-client/element"
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/font"
-	"github.com/dynamicpdf-api/go-client/input"
+	"github.com/dynamicpdf-api/go-client/v2/color"
+	"github.com/dynamicpdf-api/go-client/v2/element"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/font"
+	"github.com/dynamicpdf-api/go-client/v2/input"
 )
+
+var basePath string
+var apiKey string
+var outputPath string
+
+func init() {
+	basePath = "./resources/users-guide/"
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/pdf-fonts-example-go-output.pdf"
+}
 
 func main() {
 
 	pdfCl := endpoint.NewPdf()
-	pdfCl.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pdfCl.Endpoint.ApiKey = "DP--api-key--"
+	pdfCl.Endpoint.ApiKey = apiKey
 
 	pageInput := input.NewPage()
 	pageNumber := element.NewPageNumberingElement("A", "TopLeft", 0, 0)
@@ -27,7 +36,7 @@ func main() {
 
 	pageNumberingElementTwo := element.NewPageNumberingElement("B", "TopRight", 0, 0)
 	pageNumberingElementTwo.SetColor(color.NewRgbColorDefault().DarkGreen().Color)
-	myFont := font.NewFontResource("c:/temp/fonts-example/cnr.otf", "cnr.otf")
+	myFont := font.NewFontResource(basePath+"cnr.otf", "cnr.otf")
 	pageNumberingElementTwo.SetFont(*myFont)
 	pageNumberingElementTwo.SetFontSize(32)
 
@@ -45,7 +54,8 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile("C:/temp/fonts-example/pdf-fonts-example-output.pdf",
+		os.Remove(outputPath)
+		os.WriteFile(outputPath,
 			res.Content().Bytes(), os.ModeType)
 	}
 

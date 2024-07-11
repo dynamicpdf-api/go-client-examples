@@ -4,18 +4,25 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/input"
-	"github.com/dynamicpdf-api/go-client/resource"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/input"
+	"github.com/dynamicpdf-api/go-client/v2/resource"
 )
+
+var basePath string
+var apiKey string
+var outputPath string
+
+func init() {
+	basePath = "./resources/fill-acro-form-pdf-endpoint/"
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/form-flatten-delete-go-output.pdf"
+}
 
 func main() {
 
 	pdfAcro := endpoint.NewPdf()
-	pdfAcro.Endpoint.BaseUrl = "https://api.dpdf.io"
-	pdfAcro.Endpoint.ApiKey = "DP--api-key--"
-	outputPath := "./output/"
-	basePath := "./resources/fill-acro-form-pdf-endpoint/"
+	pdfAcro.Endpoint.ApiKey = apiKey
 
 	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"fw9AcroForm_18.pdf", "fw9AcroForm_18.pdf")
 
@@ -52,7 +59,8 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile(outputPath+"form-flatten-delete-output.pdf",
+		os.Remove(outputPath)
+		os.WriteFile(outputPath,
 			res.Content().Bytes(), os.ModeType)
 	}
 }

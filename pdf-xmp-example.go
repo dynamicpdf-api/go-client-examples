@@ -3,16 +3,26 @@ package main
 import (
 	"fmt"
 
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/resource"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/resource"
 )
+
+var basePath string
+var apiKey string
+var baseUrl string
+
+func init() {
+	basePath = "./resources/get-xmp-metadata-pdf-xmp-endpoint//"
+	apiKey = "Dp--api-key--"
+	baseUrl = "https://api.dpdf.io"
+}
 
 func main() {
 
-	resource := resource.NewPdfResourceWithResourcePath("C:/temp/dynamicpdf-api-samples/get-xmp-metadata-pdf-xmp-endpoint/fw4.pdf", "fw4.pdf")
+	resource := resource.NewPdfResourceWithResourcePath(basePath+"fw4.pdf", "fw4.pdf")
 	xmp := endpoint.NewPdfXmp(resource)
-	xmp.Endpoint.BaseUrl = "https://api.dpdf.io/"
-	xmp.Endpoint.ApiKey = "DP--api-key--"
+	xmp.Endpoint.BaseUrl = baseUrl
+	xmp.Endpoint.ApiKey = apiKey
 
 	resp := xmp.Process()
 	res := <-resp

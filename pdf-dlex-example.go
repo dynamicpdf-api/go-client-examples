@@ -3,34 +3,37 @@ package main
 import (
 	"fmt"
 	"os"
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/resource"
+
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/resource"
 )
 
-func main() {
+var basePath string
+var apiKey string
+var outputPath string
 
-	baseUrl := "https://api.dynamicpdf.com/"
-	apiKey := "DP--api-key--"
-	basePath := "./resources/creating-pdf-pdf-endpoint/"
-
-	processCloudPdf(baseUrl, apiKey, basePath)
-	processLocalPdf(baseUrl, apiKey, basePath)
+func init() {
+	basePath = "./resources/creating-pdf-pdf-endpoint/"
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/merge-pdfs-go-output.pdf"
 }
 
-func processLocalPdf(baseUrl string, apiKey string, basePath string) {
+func main() {
+	processCloudPdf()
+	processLocalPdf()
+}
+
+func processLocalPdf() {
 
 	pr := endpoint.NewPdf()
-	pr.Endpoint.BaseUrl = baseUrl
 	pr.Endpoint.ApiKey = apiKey
 
-	layoutDataResource := resource.NewLayoutDataResource(basePath + "SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")
-	
-	theDlexResource := resource.NewDlexResourceWithPath(basePath + "SimpleReportWithCoverPage.dlex", "SimpleReportWithCoverPage.dlex")
+	theDlexResource := resource.NewDlexResourceWithPath(basePath+"SimpleReportWithCoverPage.dlex", "SimpleReportWithCoverPage.dlex")
+	pr.AddDlexWithDlexResourceNLayoutDataPath(*theDlexResource, basePath+"SimpleReportWithCoverPage.json")
 
-	pr.AddNewDlexWithDlexNLayoutResources(*theDlexResource, layoutDataResource)
+	additionResource := endpoint.NewDlexWithAdditionalResource(basePath+"Northwind Logo.gif", "Northwind Logo.gif")
 
-	additionalResource := endpoint.NewDlexWithAdditionalResource(basePath + "Northwind Logo.gif", "Northwind Logo.gif")
-
+	// The dlex has an additional image in it, I'm using local dlex, need to add to the pdf endpoint
 
 	resp := pr.Process()
 	res := <-resp
@@ -52,7 +55,6 @@ func processCloudPdf(baseUrl string, apiKey string, basePath string) {
 	pr := endpoint.NewPdf()
 	pr.Endpoint.BaseUrl = baseUrl
 	pr.Endpoint.ApiKey = apiKey
-	
 
 	layoutDataResource := resource.NewLayoutDataResource(basePath+"SimpleReportWithCoverPage.json", "SimpleReportWithCoverPage.json")
 

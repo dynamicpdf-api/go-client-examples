@@ -4,21 +4,28 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dynamicpdf-api/go-client/color"
-	"github.com/dynamicpdf-api/go-client/element"
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/input"
+	"github.com/dynamicpdf-api/go-client/v2/color"
+	"github.com/dynamicpdf-api/go-client/v2/element"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/input"
 )
+
+var apiKey string
+var outputPath string
+
+func init() {
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/barcode-example-go-output.pdf"
+}
 
 func main() {
 
 	barcodePdf := endpoint.NewPdf()
-	barcodePdf.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	barcodePdf.Endpoint.ApiKey = "DP--api-key--"
+	barcodePdf.Endpoint.ApiKey = apiKey
 
 	pageInput := input.NewPage()
-	pageInput.PageHeight = 621
-	pageInput.PageWidth = 1008
+	pageInput.SetPageHeight(621)
+	pageInput.SetPageWidth(1008)
 
 	barcode := element.NewCode11Barcode("12345678910", element.TopCenter, 200, 50, 50)
 	barcode.SetColor(color.NewRgbColorDefault().Red().Color)
@@ -30,7 +37,7 @@ func main() {
 	res := <-resp
 
 	if res.IsSuccessful() == true {
-		os.WriteFile("./output/barcode-example-output.pdf",
+		os.WriteFile(outputPath,
 			res.Content().Bytes(), os.ModeType)
 	} else {
 		fmt.Println("Error Message:" + res.ErrorMessage())

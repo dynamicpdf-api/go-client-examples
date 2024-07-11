@@ -14,9 +14,9 @@ var apiKey string
 var outputPath string
 
 func init() {
-	basePath = "./resources/merge-pdfs-pdf-endpoint/"
+	basePath = "./resources/delete-pages/"
 	apiKey = "Dp--api-key--"
-	outputPath = "./output/merge-pdfs-go-output.pdf"
+	outputPath = "./output/delete-pages-go-output.pdf"
 }
 
 func main() {
@@ -24,20 +24,19 @@ func main() {
 	pr := endpoint.NewPdf()
 	pr.Endpoint.ApiKey = apiKey
 
-	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"DocumentA.pdf", "DocumentA.pdf")
+	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"pdfnumberedinput.pdf", "pagenumberedinput1.pdf")
 	prInput := input.NewPdfWithResource(pdfResource)
 	prInput.StartPage = 1
-	prInput.PageCount = 1
+	prInput.PageCount = 3
 
 	pr.Inputs = append(pr.Inputs, prInput)
 
-	pdfResource2 := resource.NewPdfResourceWithResourcePath(basePath+"DocumentB.pdf", "DocumentB.pdf")
+	pdfResource2 := resource.NewPdfResourceWithResourcePath(basePath+"pdfnumberedinput.pdf", "pagenumberedinput2.pdf")
 	prInput2 := input.NewPdfWithResource(pdfResource2)
-	pr.Inputs = append(pr.Inputs, prInput2)
+	prInput2.StartPage = 6
+	prInput2.PageCount = 2
 
-	mergeOption := input.NewMergeOptions()
-	prInput3 := input.NewPdfWithCloudPath("samples/merge-pdfs-pdf-endpoint/DocumentC.pdf", mergeOption)
-	pr.Inputs = append(pr.Inputs, prInput3)
+	pr.Inputs = append(pr.Inputs, prInput2)
 
 	resp := pr.Process()
 	res := <-resp
@@ -50,7 +49,8 @@ func main() {
 		}
 	} else {
 		os.Remove(outputPath)
-		os.WriteFile(outputPath, res.Content().Bytes(), os.ModeType)
+		os.WriteFile(outputPath,
+			res.Content().Bytes(), os.ModeType)
 	}
 
 }

@@ -4,18 +4,25 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dynamicpdf-api/go-client/color"
-	"github.com/dynamicpdf-api/go-client/element"
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/font"
-	"github.com/dynamicpdf-api/go-client/input"
+	"github.com/dynamicpdf-api/go-client/v2/color"
+	"github.com/dynamicpdf-api/go-client/v2/element"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/font"
+	"github.com/dynamicpdf-api/go-client/v2/input"
 )
+
+var apiKey string
+var outputPath string
+
+func init() {
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/pdf-google-fonts-go-example-output.pdf"
+}
 
 func main() {
 
 	pdfCl := endpoint.NewPdf()
-	pdfCl.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pdfCl.Endpoint.ApiKey = "DP.--api-key--"
+	pdfCl.Endpoint.ApiKey = apiKey
 
 	pageInput := input.NewPage()
 	pageNumber := element.NewPageNumberingElement("test", "TopLeft", 0, 0)
@@ -44,7 +51,8 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile("C:/temp/fonts-example/pdf-google-fonts-go-example-output.pdf",
+		os.Remove(outputPath)
+		os.WriteFile(outputPath,
 			res.Content().Bytes(), os.ModeType)
 	}
 

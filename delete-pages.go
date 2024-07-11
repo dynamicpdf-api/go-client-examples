@@ -4,26 +4,34 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/input"
-	"github.com/dynamicpdf-api/go-client/resource"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/input"
+	"github.com/dynamicpdf-api/go-client/v2/resource"
 )
+
+var basePath string
+var apiKey string
+var outputPath string
+
+func init() {
+	basePath = "./resources/delete-pages/"
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/delete-pages-go-output.pdf.pdf"
+}
 
 func main() {
 
 	pr := endpoint.NewPdf()
-	pr.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pr.Endpoint.ApiKey = "DP--api-key--"
-	basePath := "c:/temp/dynamicpdf-api-samples/delete-pages/"
+	pr.Endpoint.ApiKey = apiKey
 
-	pdfResource := resource.NewPdfResourceWithResourcePath(basePath + "pdfnumberedinput.pdf", "pagenumberedinput1.pdf")
-	prInput := input.NewPdfWithResource(pdfResource)
+	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"pdfnumberedinput.pdf", "pagenumberedinput1.pdf")
+	prInput := pr.AddPdf(pdfResource, input.NewMergeOptions())
 	prInput.StartPage = 1
 	prInput.PageCount = 3
 
 	pr.Inputs = append(pr.Inputs, prInput)
 
-	pdfResource2 := resource.NewPdfResourceWithResourcePath(basePath + "pdfnumberedinput.pdf", "pagenumberedinput2.pdf")
+	pdfResource2 := resource.NewPdfResourceWithResourcePath(basePath+"pdfnumberedinput.pdf", "pagenumberedinput2.pdf")
 	prInput2 := input.NewPdfWithResource(pdfResource2)
 	prInput2.StartPage = 6
 	prInput2.PageCount = 2
@@ -40,7 +48,8 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile(basePath +"delete-output.pdf",
+		os.Remove(outputPath)
+		os.WriteFile(outputPath,
 			res.Content().Bytes(), os.ModeType)
 	}
 

@@ -16,15 +16,15 @@ var outputPath string
 func init() {
 	basePath = "./resources/users-guide/"
 	apiKey = "Dp--api-key--"
-	outputPath = "./output/word-to-pdf-output-go.pdf"
+	outputPath = "./output/excel-to-pdf-output-go.pdf"
 }
 
 func main() {
 
 	pdfExample := endpoint.NewPdf()
 	pdfExample.Endpoint.ApiKey = apiKey
-	wordResource := resource.NewWordResourceWithResourcePath(basePath+"Doc1.docx", "Doc1.docx")
-	pdfInput := input.NewWordInputWithResource(wordResource)
+	excelResource := resource.NewExcelResourceWithResourcePath(basePath+"sample-data.xlsx", "sample-data.xlsx")
+	pdfInput := input.NewExcelInputWithResource(excelResource)
 	pdfExample.Inputs = append(pdfExample.Inputs, pdfInput)
 	resp := pdfExample.Process()
 	res := <-resp

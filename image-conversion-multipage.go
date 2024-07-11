@@ -15,7 +15,7 @@ var outputPath string
 
 func init() {
 	basePath = "./resources/image-conversion/"
-	apiKey = "DP--api-key--"
+	apiKey = "Dp--api-key--"
 	outputPath = "./output/image-conversion-multipage-tiff-output.pdf"
 }
 
@@ -39,6 +39,7 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
+		os.Remove(outputPath)
 		os.WriteFile(outputPath, res.Content().Bytes(), os.ModeType)
 	}
 

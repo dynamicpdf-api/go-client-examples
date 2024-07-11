@@ -3,17 +3,25 @@ package main
 import (
 	"fmt"
 	"os"
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/input"
+
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/input"
 )
+
+var basePath string
+var apiKey string
+var outputPath string
+
+func init() {
+	basePath = "./resources/add-bookmarks/"
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/acroform-pdfs-go-output.pdf"
+}
 
 func main() {
 
 	pdfAcro := endpoint.NewPdf()
-	pdfAcro.Endpoint.BaseUrl = "https://api.dpdf.io/"
-	pdfAcro.Endpoint.ApiKey = "DP--api-key--"
-	outputPath := "./output/"
-
+	pdfAcro.Endpoint.ApiKey = apiKey
 
 	pdfInput := input.NewPdfWithCloudPath("samples/fill-acro-form-pdf-endpoint/fw9AcroForm_18.pdf", input.NewMergeOptions())
 	pdfAcro.Inputs = append(pdfAcro.Inputs, pdfInput)
@@ -47,7 +55,8 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile(outputPath + "acroform-pdfs-output.pdf",
+		os.Remove(outputPath)
+		os.WriteFile(outputPath,
 			res.Content().Bytes(), os.ModeType)
 	}
 }

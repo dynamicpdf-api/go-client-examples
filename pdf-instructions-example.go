@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dynamicpdf-api/go-client/color"
-	"github.com/dynamicpdf-api/go-client/element"
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/font"
-	"github.com/dynamicpdf-api/go-client/input"
-	"github.com/dynamicpdf-api/go-client/resource"
+	"github.com/dynamicpdf-api/go-client/v2/color"
+	"github.com/dynamicpdf-api/go-client/v2/element"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/font"
+	"github.com/dynamicpdf-api/go-client/v2/input"
+	"github.com/dynamicpdf-api/go-client/v2/resource"
 )
 
 func topLevelMetadata() *endpoint.Pdf {
@@ -19,8 +19,8 @@ func topLevelMetadata() *endpoint.Pdf {
 	tlm.Creator = "John Creator"
 	tlm.Keywords = "dynamicpdf api example pdf java instructions"
 	tlm.Title = "Sample PDF"
-	pageInput.PageHeight = 612
-	pageInput.PageWidth = 1008
+	pageInput.SetPageHeight(612)
+	pageInput.SetPageWidth(1008)
 
 	tlm.Inputs = append(tlm.Inputs, pageInput)
 
@@ -32,8 +32,8 @@ func mergeExample(basePath string) *endpoint.Pdf {
 	mergeOption := input.NewMergeOptions()
 	prInput := input.NewPdfWithCloudPath("samples/merge-pdfs-pdf-endpoint/DocumentB.pdf", mergeOption)
 	pr.Inputs = append(pr.Inputs, prInput)
-	//imageResource := resource.NewImageResourceWithResourcePath(basePath+"DPDFLogo.png", "DPDFLogo.png")
-	//pr.AddImage(imageResource)
+	imageResource := resource.NewImageResourceWithResourcePath(basePath+"DPDFLogo.png", "DPDFLogo.png")
+	pr.AddImage(imageResource)
 	pdfResource := resource.NewPdfResourceWithResourcePath(basePath+"DocumentA.pdf", "DocumentA.pdf")
 	prInput2 := input.NewPdfWithResource(pdfResource)
 	pr.Inputs = append(pr.Inputs, prInput2)
@@ -109,13 +109,13 @@ func addOutlinesExistingPdf(basePath string) *endpoint.Pdf {
 	return pdfOut
 }
 
-//func imageExample(basePath string) *endpoint.Pdf {
-//	prImage := endpoint.NewPdf()
-//	imageResource := resource.NewImageResourceWithResourcePath(basePath+"A.png", "A.png")
-//	prImage.AddImage(imageResource)
-//	prImage.AddImageCloudPath("samples/get-image-info-image-info-endpoint/dynamicpdfLogo.png")
-//	return prImage
-//}
+func imageExample(basePath string) *endpoint.Pdf {
+	prImage := endpoint.NewPdf()
+	imageResource := resource.NewImageResourceWithResourcePath(basePath+"A.png", "A.png")
+	prImage.AddImage(imageResource)
+	prImage.AddImageCloudPath("samples/get-image-info-image-info-endpoint/dynamicpdfLogo.png")
+	return prImage
+}
 
 func barcodeExample() *endpoint.Pdf {
 	barcodePdf := endpoint.NewPdf()
@@ -233,8 +233,8 @@ func main() {
 
 	var theBasePath = "./resources/users-guide/"
 	var theBaseUrl = "https://api.dynamicpdf.com/"
-	var theOutputPath = "./Output/"
-	var apiKey = "DP--api-key--"
+	var theOutputPath = "./output/"
+	var apiKey = "Dp--api-key--"
 
 	pdfTlm := topLevelMetadata()
 	process(pdfTlm, theOutputPath+"toplevelmetadata-ouput.pdf", theBaseUrl, apiKey)
@@ -263,14 +263,14 @@ func main() {
 	//pdfdlexResourceExample := dlexResourceExample(theBasePath)
 	//process(pdfdlexResourceExample, theOutputPath +"dlexExample-output.pdf", theBaseUrl, apiKey)
 
-	//pdfIm := imageExample(theBasePath)
-	//process(pdfIm, theOutputPath + "pdfImage-output.pdf", theBaseUrl, apiKey)
+	pdfIm := imageExample(theBasePath)
+	process(pdfIm, theOutputPath+"pdfImage-output.pdf", theBaseUrl, apiKey)
 
 	pdfMerge := mergeExample(theBasePath)
 	process(pdfMerge, theOutputPath+"go-merge-example-output.pdf", theBaseUrl, apiKey)
 
 	pdfOut := outlineExample()
-	process(pdfOut, theOutputPath +"outline-example-output.pdf", theBaseUrl, apiKey)
+	process(pdfOut, theOutputPath+"outline-example-output.pdf", theBaseUrl, apiKey)
 
 	pdfOut2 := addOutlinesExistingPdf(theBasePath)
 	process(pdfOut2, theOutputPath+"outline-existing-example-output.pdf", theBaseUrl, apiKey)
@@ -286,6 +286,7 @@ func process(thePdf *endpoint.Pdf, outputFilePath string, baseUrl string, apiKey
 	res := <-resp
 
 	if res.IsSuccessful() == true {
+		os.Remove(outputFilePath)
 		os.WriteFile(outputFilePath,
 			res.Content().Bytes(), os.ModeType)
 	} else {

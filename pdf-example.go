@@ -3,40 +3,45 @@ package main
 import (
 	"fmt"
 	"os"
-	"github.com/dynamicpdf-api/go-client/color"
-	"github.com/dynamicpdf-api/go-client/element"
-	"github.com/dynamicpdf-api/go-client/endpoint"
-	"github.com/dynamicpdf-api/go-client/font"
-	"github.com/dynamicpdf-api/go-client/input"
+
+	"github.com/dynamicpdf-api/go-client/v2/color"
+	"github.com/dynamicpdf-api/go-client/v2/element"
+	"github.com/dynamicpdf-api/go-client/v2/endpoint"
+	"github.com/dynamicpdf-api/go-client/v2/font"
+	"github.com/dynamicpdf-api/go-client/v2/input"
 )
+
+var apiKey string
+var outputPath string
+
+func init() {
+	apiKey = "Dp--api-key--"
+	outputPath = "./output/pdf-page-example-go-output.pdf"
+}
 
 func main() {
 
 	pdfExample := endpoint.NewPdf()
-	pdfExample.Endpoint.BaseUrl = "https://api.dynamicpdf.com/"
-	pdfExample.Endpoint.ApiKey = "DP--api-key--"
+	pdfExample.Endpoint.ApiKey = apiKey
 
 	pageInput := input.NewPage()
 	pdfExample.Author = "John Doe"
 	pdfExample.Title = "My Blank PDF Page"
-	pageInput.PageHeight = 612
-	pageInput.PageWidth = 1008
+	pageInput.SetPageHeight(612)
+	pageInput.SetPageWidth(1008)
 
-	pageNumber := element.NewPageNumberingElement("1", "TopRight", 0, 0 )
+	pageNumber := element.NewPageNumberingElement("1", "TopRight", 0, 0)
 	pageNumber.SetFontSize(24)
 	pageNumber.SetFont(font.Courier())
-	
+
 	pageColor := color.NewRgbColorDefault().Red()
 	pageNumber.SetColor(pageColor.Color)
 
 	pageInput.Elements = append(pageInput.Elements, pageNumber)
 	pdfExample.Inputs = append(pdfExample.Inputs, pageInput)
 
-	fmt.Print("here")
-
-    resp := pdfExample.Process()
-    res := <-resp
-	
+	resp := pdfExample.Process()
+	res := <-resp
 
 	if res.IsSuccessful() == false {
 		if res.ClientError() != nil {
@@ -44,9 +49,10 @@ func main() {
 		} else {
 			fmt.Print("Failed with error json: " + res.ErrorJson())
 		}
-	} else{
-		os.WriteFile("C:/temp/dynamicpdf-api-samples/pdf-page-example-output.pdf", 
-		res.Content().Bytes(), os.ModeType)
+	} else {
+		os.Remove(outputPath)
+		os.WriteFile(outputPath,
+			res.Content().Bytes(), os.ModeType)
 	}
 
 }
