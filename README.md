@@ -17,12 +17,12 @@ The GO client library (`go-client`) is available on Github ([go-client](https://
 
 ## Package
 
-* The DynamicPDF.API library is available via the GO package library ([go-client](https://pkg.go.dev/github.com/dynamicpdf-api/go-client)) or on Github ([go-client](https://github.com/dynamicpdf-api/go-client)).
+* The DynamicPDF.API library is available via the GO package library ([go-client](https://pkg.go.dev/github.com/dynamicpdf-api/go-client/v2)) or on Github ([go-client](https://github.com/dynamicpdf-api/go-client)).
 
 
 ## Resources
 
-To obtain the resources for the project, login to [cloud.dynamicpdf.com](https://cloud.dynamicpdf.com/) (assuming you have an account), and go to the **Resource Manager**. You use the `samples` folder to add the resources for the tutorials and examples from this project. All resources for the sample code in the Users Guide are available at `users-guide-resources`. 
+To obtain the resources for the project, login to [cloud.dynamicpdf.com](https://cloud.dynamicpdf.com/) (assuming you have an account), and go to the **Resource Manager**. You use the `samples` folder to add the resources for the tutorials and examples from this project. Local resources are available in the resources folder of this project. 
 
 - [Resource Manager Samples](https://cloud.dynamicpdf.com/docs/usersguide/environment-manager/environment-manager-sample-resources)  
 
