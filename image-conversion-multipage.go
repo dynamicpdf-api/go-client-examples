@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"github.com/dynamicpdf-api/go-client/v2/endpoint"
-	"github.com/dynamicpdf-api/go-client/v2/input"
 	"github.com/dynamicpdf-api/go-client/v2/resource"
 )
 
@@ -17,7 +16,7 @@ var outputPath string
 func init() {
 	basePath = "./resources/image-conversion/"
 	apiKey = "DP--api-key--"
-	outputPath = "./output/image-conversion-output.pdf"
+	outputPath = "./output/image-conversion-multipage-tiff-output.pdf"
 }
 
 func main() {
@@ -25,15 +24,10 @@ func main() {
 	pr := endpoint.NewPdf()
 	pr.Endpoint.ApiKey = apiKey
 
-	imageResource1 := resource.NewImageResourceWithResourcePath(basePath+"testimage.tif", "testimage.tif")
+	imageResource := resource.NewImageResourceWithResourcePath(basePath+"MultiPageTiff.tif", "multipage.tif")
+	pr.AddImage(imageResource)
 
-	imageInput1 := input.NewImagewithImageResource(imageResource1)
-	pr.Inputs = append(pr.Inputs, imageInput1)
-
-	imageResource2 := resource.NewImageResourceWithResourcePath(basePath+"dynamicpdfLogo.png", "dynamicpdfLogo.png")
-	imageInput2 := pr.AddImage(imageResource2)
-	imageInput2.ScaleX = 25
-	imageInput2.ScaleY = 25
+	fmt.Print(pr.GetInstructionsJson(true))
 
 	resp := pr.Process()
 	res := <-resp
@@ -45,8 +39,7 @@ func main() {
 			fmt.Print("Failed with error: " + res.ErrorJson())
 		}
 	} else {
-		os.WriteFile(outputPath,
-			res.Content().Bytes(), os.ModeType)
+		os.WriteFile(outputPath, res.Content().Bytes(), os.ModeType)
 	}
 
 }
