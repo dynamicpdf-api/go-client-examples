@@ -14,7 +14,7 @@ var apiKey string
 var outputPath string
 
 func init() {
-	apiKey = "Dp--api-key--"
+	apiKey = "DP--api-key--"
 	outputPath = "./output/barcode-example-go-output.pdf"
 }
 
@@ -28,15 +28,19 @@ func main() {
 	pageInput.SetPageWidth(1008)
 
 	barcode := element.NewCode11Barcode("12345678910", element.TopCenter, 200, 50, 50)
+	//barcode.Placement = element.TopCenter
 	barcode.SetColor(color.NewRgbColorDefault().Red().Color)
 
 	pageInput.Elements = append(pageInput.Elements, barcode)
 	barcodePdf.Inputs = append(barcodePdf.Inputs, pageInput)
 
+	fmt.Print(barcodePdf.GetInstructionsJson(true))
+
 	resp := barcodePdf.Process()
 	res := <-resp
 
 	if res.IsSuccessful() == true {
+		os.Remove(outputPath)
 		os.WriteFile(outputPath,
 			res.Content().Bytes(), os.ModeType)
 	} else {

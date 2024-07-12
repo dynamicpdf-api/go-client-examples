@@ -35,5 +35,4 @@ func main() {
 	} else {
 		fmt.Print(res.ErrorJson())
 	}
-
 }
