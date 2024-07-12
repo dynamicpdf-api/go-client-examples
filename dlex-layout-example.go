@@ -17,7 +17,6 @@ func init() {
 	basePath = "./resources/creating-pdf-dlex-layout/"
 	apiKey = "Dp--api-key--"
 	outputPath = "./output/"
-	baseUrl = "https://api.dpdf.io"
 }
 
 func main() {
