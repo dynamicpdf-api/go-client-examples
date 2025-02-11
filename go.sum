@@ -1,8 +1,8 @@
-github.com/dynamicpdf-api/go-client/v2 v2.2.1 h1:GC6+QzvxHyhzpNRFJma3q0H98Oda0buna+igoL3WfeU=
-github.com/dynamicpdf-api/go-client/v2 v2.2.1/go.mod h1:p/vwquSe4h7OzdDy95vHIJSJeZS9EZlT5XLJ4JIHpOM=
-github.com/gabriel-vasile/mimetype v1.4.5 h1:J7wGKdGu33ocBOhGy0z653k/lFKLFDPJMG8Gql0kxn4=
-github.com/gabriel-vasile/mimetype v1.4.5/go.mod h1:ibHel+/kbxn9x2407k1izTA1S81ku1z/DlgOW2QE0M4=
+github.com/dynamicpdf-api/go-client/v2 v2.2.2 h1:BOph2aqp43XdmoIaQRQC+extu1XzsU5I28rQdT+4l3E=
+github.com/dynamicpdf-api/go-client/v2 v2.2.2/go.mod h1:p/vwquSe4h7OzdDy95vHIJSJeZS9EZlT5XLJ4JIHpOM=
+github.com/gabriel-vasile/mimetype v1.4.8 h1:FfZ3gj38NjllZIeJAmMhr+qKL8Wu+nOoI3GqacKw1NM=
+github.com/gabriel-vasile/mimetype v1.4.8/go.mod h1:ByKUIKGjh1ODkGM1asKUbQZOLGrPjydw3hYPU2YU9t8=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-golang.org/x/net v0.29.0 h1:5ORfpBpCs4HzDYoodCDBbwHzdR5UrLBZ3sOnUJmFoHo=
-golang.org/x/net v0.29.0/go.mod h1:gLkgy8jTGERgjzMic6DS9+SP0ajcu6Xu3Orq/SpETg0=
+golang.org/x/net v0.35.0 h1:T5GQRQb2y08kTAByq9L4/bz8cipCdA8FbRTXewonqY8=
+golang.org/x/net v0.35.0/go.mod h1:EglIi67kWsHKlRzzVMUD93VMSWGFOMSZgxFjparz1Qk=
